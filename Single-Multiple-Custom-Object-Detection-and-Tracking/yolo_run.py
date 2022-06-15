@@ -1,4 +1,6 @@
-
+'''
+A simple script to check if our object-detector is working well...
+'''
 from deep_sort.yoloV5 import YOLO_Fast
 import cv2
 
