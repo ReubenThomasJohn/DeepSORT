@@ -1,36 +1,49 @@
 # Use python 3.8.10
 
+# Import the required libraries
 import os
-
 import time
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 
+# This is a function that takes our bounding boxes, and converts them into a list data type. 
 from helpers.convert_boxes import convert_boxes
 
+# Here are the core deep-sort functions. 
+
+# Pre-processing contains the code for the non-maxima suppresion
 from deep_sort import preprocessing
+# nn-matching contains all the code to implement the cost function to associate tracks
 from deep_sort import nn_matching
+# Here is a class to hold all the information in a single detection from yolo()
 from deep_sort.detection import Detection
+# Here is the Tracker class to hold all information regarding a tracked object. This is the key class - make sure to open up the files and understand
+# the methods implemented
 from deep_sort.tracker import Tracker
 from tools import generate_detections as gdet
 
+# quick way to put all the yolo classes into a list
 class_names = [c.strip() for c in open(os.path.abspath('Tracking_DeepSORT/data/labels/coco.names')).readlines()]
 
+# we import the yolo class we created in the previous project
 from deep_sort.yoloV5 import YOLO_Fast
+# initialize the object
 yolo = YOLO_Fast(sc_thresh=.5, nms_thresh=.45, cnf_thresh=.45, model='./Tracking_DeepSORT/deep_sort/onnx_models/yolov5s.onnx')
 
+# cost-related hyperparameters
 max_cosine_distance = 0.5
 nn_budget = None
 nms_max_overlap = 0.8
 
+# CNN based feature extraction model
 model_filename = 'Tracking_DeepSORT/model_data/mars-small128.pb'
 encoder = gdet.create_box_encoder(model_filename, batch_size=1)
 metric = nn_matching.NearestNeighborDistanceMetric('cosine', max_cosine_distance, nn_budget)
 tracker = Tracker(metric)
 
+# create our video object
 vid = cv2.VideoCapture('Tracking_DeepSORT/data/video/MOT16-13-raw.mp4')
-
 codec = cv2.VideoWriter_fourcc(*'XVID')
 vid_fps =int(vid.get(cv2.CAP_PROP_FPS))
 # vid_width,vid_height = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH)), int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -60,16 +73,20 @@ while True:
         names.append(class_names[int(classes[i])])
     names = np.array(names)
     converted_boxes = convert_boxes(img_in, boxes[0])
+    # we extract the features corresponding to each bounding box detected. 
     features = encoder(img_in, converted_boxes)
 
+    # this is a list of Detection() objects, that contain information for the bbox, score, class, and feature corresponding to each detection
     detections = [Detection(bbox, score, class_name, feature) for bbox, score, class_name, feature in
                   zip(converted_boxes, scores[0], names, features)]
 
     boxs = np.array([d.tlwh for d in detections])
     scores = np.array([d.confidence for d in detections])
     classes = np.array([d.class_name for d in detections])
+    # we perform NMS on all the detections, and extract indices of only the boxes to be kept. That is, the overlapping boxes are removed
     indices = preprocessing.non_max_suppression(boxs, classes, nms_max_overlap, scores)
     detections = [detections[i] for i in indices]
+    # Kalman Filter step
     tracker.predict()
     tracker.update(detections)
 
