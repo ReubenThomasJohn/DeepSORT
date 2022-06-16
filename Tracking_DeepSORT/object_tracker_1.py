@@ -90,19 +90,25 @@ while True:
     tracker.predict()
     tracker.update(detections)
 
+    # These lines are simply for visualization purposes. 
     cmap = plt.get_cmap('tab20b')
     colors = [cmap(i)[:3] for i in np.linspace(0,1,20)]
 
     current_count = int(0)
 
+    # looping over each tracked obstacle
     for track in tracker.tracks:
+        # if the track has not been confirmed yet, has not been updated for more than 1 frame, skip it.
         if not track.is_confirmed() or track.time_since_update >1:
             continue
+        # convert the bbox from tlwh to tlbr
         bbox = track.to_tlbr()
+        # extract the tracks class using the get_class() method
         class_name = track.get_class()
         color = colors[int(track.track_id) % len(colors)]
         color = [i * 255 for i in color]
 
+        # visualization
         cv2.rectangle(img_in, (int(bbox[0]),int(bbox[1])), (int(bbox[2]),int(bbox[3])), color, 2)
         cv2.rectangle(img_in, (int(bbox[0]), int(bbox[1]-30)), (int(bbox[0])+(len(class_name)
                     +len(str(track.track_id)))*17, int(bbox[1])), color, -1)
@@ -142,6 +148,8 @@ while True:
 
     if cv2.waitKey(1) == ord('q'):
         break
+
+# close the video and video writer objects. destroy all cv2 windows.
 vid.release()
 out.release()
 cv2.destroyAllWindows()
