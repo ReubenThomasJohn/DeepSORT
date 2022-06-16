@@ -1,3 +1,5 @@
+# Use python 3.8.10
+
 import os
 
 import time
@@ -13,26 +15,26 @@ from deep_sort.detection import Detection
 from deep_sort.tracker import Tracker
 from tools import generate_detections as gdet
 
-class_names = [c.strip() for c in open(os.path.abspath('Single-Multiple-Custom-Object-Detection-and-Tracking/data/labels/coco.names')).readlines()]
+class_names = [c.strip() for c in open(os.path.abspath('Tracking_DeepSORT/data/labels/coco.names')).readlines()]
 
 from deep_sort.yoloV5 import YOLO_Fast
-yolo = YOLO_Fast(sc_thresh=.5, nms_thresh=.45, cnf_thresh=.45, model='./Single-Multiple-Custom-Object-Detection-and-Tracking/deep_sort/onnx_models/yolov5s.onnx')
+yolo = YOLO_Fast(sc_thresh=.5, nms_thresh=.45, cnf_thresh=.45, model='./Tracking_DeepSORT/deep_sort/onnx_models/yolov5s.onnx')
 
 max_cosine_distance = 0.5
 nn_budget = None
 nms_max_overlap = 0.8
 
-model_filename = 'Single-Multiple-Custom-Object-Detection-and-Tracking/model_data/mars-small128.pb'
+model_filename = 'Tracking_DeepSORT/model_data/mars-small128.pb'
 encoder = gdet.create_box_encoder(model_filename, batch_size=1)
 metric = nn_matching.NearestNeighborDistanceMetric('cosine', max_cosine_distance, nn_budget)
 tracker = Tracker(metric)
 
-vid = cv2.VideoCapture('Single-Multiple-Custom-Object-Detection-and-Tracking/data/video/MOT16-13-raw.mp4')
+vid = cv2.VideoCapture('Tracking_DeepSORT/data/video/MOT16-13-raw.mp4')
 
 codec = cv2.VideoWriter_fourcc(*'XVID')
 vid_fps =int(vid.get(cv2.CAP_PROP_FPS))
 # vid_width,vid_height = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH)), int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
-out = cv2.VideoWriter('Single-Multiple-Custom-Object-Detection-and-Tracking/data/video/002.avi', codec, vid_fps, (640, 640))
+out = cv2.VideoWriter('Tracking_DeepSORT/data/video/002.avi', codec, vid_fps, (640, 640))
 
 from collections import deque
 pts = [deque(maxlen=30) for _ in range(1000)] 
