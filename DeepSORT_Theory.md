@@ -19,12 +19,12 @@ The Kalman filter assumes a simple linear velocity model, and helps in factoring
 Now that we have the tracked bounding boxes from the (i-1)th frame, we need a way to associate these boxes with the detections in the ith frame. This is known as the association problem. It arises, because the object detector, in our case `yolov5`, detects objects independently and does not know if the yellow car from the previous frame is the same yellow car in the current frame, or a different one.
 
 This implementation uses 2 metrics to perform associations:
-1. Distance metric:
+1. Distance metric: \
 The squared mahalanobis distance is used. This metric is better tan the euclidean distance since we are measuring the distance between two normal distributions (from the Kalman Filter). Check out these links - 
-a. https://stackoverflow.com/questions/48858104/squared-mahalanobis-distance-function-in-python-returning-array-why
-b. https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.mahalanobis.html
-c. https://www.machinelearningplus.com/statistics/mahalanobis-distance/
-d. https://www.geeksforgeeks.org/how-to-calculate-mahalanobis-distance-in-python/
+a. https://stackoverflow.com/questions/48858104/ \ squared-mahalanobis-distance-function-in-python-returning-array-why
+b. https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.mahalanobis.html \
+c. https://www.machinelearningplus.com/statistics/mahalanobis-distance/ \
+d. https://www.geeksforgeeks.org/how-to-calculate-mahalanobis-distance-in-python/ \
 2. Hungarian algorithm:
 This is a simple and efficient assignment algorithm. Look at this link to understand the hungarian algorithm. That creates a cost matrix, and then performs assignment. Also try researching why a simple coloum-wise max over all rows in the hungarian matrix cannot be used in real-time. 
 a. https://www.geeksforgeeks.org/hungarian-algorithm-assignment-problem-set-1-introduction/
