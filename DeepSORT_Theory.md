@@ -20,7 +20,7 @@ Now that we have the tracked bounding boxes from the (i-1)th frame, we need a wa
 
 This implementation uses 2 metrics to perform associations:
 1. Distance metric: \
-The squared mahalanobis distance is used. This metric is better tan the euclidean distance since we are measuring the distance between two normal distributions (from the Kalman Filter). Check out these links - 
+The squared mahalanobis distance is used. This metric is better tan the euclidean distance since we are measuring the distance between two normal distributions (from the Kalman Filter). Check out these links - \
 a. https://stackoverflow.com/questions/48858104/squared-mahalanobis-distance-function-in-python-returning-array-why \
 b. https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.mahalanobis.html \
 c. https://www.machinelearningplus.com/statistics/mahalanobis-distance/ \
