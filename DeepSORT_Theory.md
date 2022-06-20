@@ -28,8 +28,8 @@ b. https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.m
 c. https://www.machinelearningplus.com/statistics/mahalanobis-distance/ \
 d. https://www.geeksforgeeks.org/how-to-calculate-mahalanobis-distance-in-python/
 2. Hungarian algorithm:
-This is a simple and efficient assignment algorithm. Look at this link to understand the hungarian algorithm. That creates a cost matrix, and then performs assignment. Also try researching why a simple coloum-wise max over all rows in the hungarian matrix cannot be used in real-time. 
-a. https://www.geeksforgeeks.org/hungarian-algorithm-assignment-problem-set-1-introduction/
+This is a simple and efficient assignment algorithm. Look at this link to understand the hungarian algorithm. That creates a cost matrix, and then performs assignment. Also try researching why a simple coloum-wise max over all rows in the hungarian matrix cannot be used in real-time. \
+a. https://www.geeksforgeeks.org/hungarian-algorithm-assignment-problem-set-1-introduction/ \
 b. https://www.hungarianalgorithm.com/hungarianalgorithm.php
 3. Appearance feature vector: \
 This is the genius of the deepSORT algorithm. Essentially, we require a vector that can describe all the features fo a given image. In our case, we encode all the bounding boxes, and pass it into a classifier that is trained to detect all classes that we are concerned with. Therefore, the object detector, and this classifier must be able to detect the same classes. Once it is trained over the dataset, the final classification layer is removed, and the rest of the network is kept. This is usually a Dense layer having a single feature vector, that does the classification. 
@@ -43,7 +43,6 @@ The effect of Da is so vast, that the kalman filter can be turned off completely
 cosine similarity help: \
 
 a. https://www.delftstack.com/howto/python/cosine-similarity-between-lists-python/ \
-
 b. https://www.geeksforgeeks.org/how-to-calculate-cosine-similarity-in-python/ 
 
 ## Custom feature-extractor: 
