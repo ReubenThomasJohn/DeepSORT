@@ -1,7 +1,9 @@
+# DeepSORT Theory:
 This is a document which contains the relevant theory concerning the DeepSORT algorithm, along with further links for further learning. This is a high-level overview and if you would like to understand further, we encourage you to go through the links - and then understand the files, classes and functions in the Tracking_DeepSORT/deep_sort folder one by one.
 
 The deep sort algorithm is one that allows for multiple object tracking (MOT). Meaning, that if multiple objects belonging to the various classes that the object detector has been trained to detect are present in the frame - those objects can be identified, and tracked as being the same object from one frame to the next. This is done by understanding an objects motion and appearance features. 
 
+## Challenges in object-tracking:
 However, here are some problems that are common to multiple object tracking on video streams / data.
 
 1. Occlusion:
@@ -9,7 +11,7 @@ One of the most common challenges - imagine tracking the people in a busy market
 2. False positives and negatives - No object detector is 100 percent accurate. Care must be taken that these false detections don't hamper the tracker.
 3. There are many more issues involved in tracking like variations in camera angles, non stationary cameras etc. 
 
-Building-blocks of the DeepSORT algorithm. 
+## Building-blocks of the DeepSORT algorithm. 
 1. Kalman Filter:
 This is a crucial step in DeepSORT. If Kalman Filters are new to you, please do check out the following playlist: https://www.youtube.com/playlist?list=PLn8PRpmsu08pzi6EMiYnR-076Mh-q3tWr. 
 In this particular implementation, the state contains 8 variables: (u, v, a, h, u', v', a', h'), where (u,v) are the boundin box centres, a is the aspect ratio, h is the height of the image. The others are the velocities of these 4 variables.
@@ -42,7 +44,7 @@ cosine similarity help: \
 a. https://www.delftstack.com/howto/python/cosine-similarity-between-lists-python/ \
 b. https://www.geeksforgeeks.org/how-to-calculate-cosine-similarity-in-python/ \
 
-# Custom feature-extractor: 
+## Custom feature-extractor: 
 These days, simamese detectors with a triplet loss function are used for feature extraction. This is because Siamese networks work excellently on feature matching problems since they are trained to keep together data points of similar features while at the same time, learn to push away this groups far from other groups. More technically, the objective of the CNN loss function is to minimize the cosine distance between the feature vectors of the same class, and maximise the cosine distance between feature vectors of different classes. 
 Here are a few helpful links: \
 a. https://pyimagesearch.com/2020/11/30/siamese-networks-with-keras-tensorflow-and-deep-learning/ \
