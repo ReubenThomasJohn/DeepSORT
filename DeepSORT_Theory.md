@@ -40,12 +40,14 @@ Thus, the updated metric will be:
 
 `D = lambda * Dk + (1-lambda) * Da`. Here, Dk is the mahalonobis distance, Da is the cosine distance between the appearance feature vectors, and lambda is the weighting factor. 
 The effect of Da is so vast, that the kalman filter can be turned off completely, that is, lambda = 0, and still acheive State of the Art (SOTA) results. \
-cosine similarity help: \ 
+cosine similarity help: \
+
 a. https://www.delftstack.com/howto/python/cosine-similarity-between-lists-python/ \
-b. https://www.geeksforgeeks.org/how-to-calculate-cosine-similarity-in-python/ \
+
+b. https://www.geeksforgeeks.org/how-to-calculate-cosine-similarity-in-python/ 
 
 ## Custom feature-extractor: 
 These days, simamese detectors with a triplet loss function are used for feature extraction. This is because Siamese networks work excellently on feature matching problems since they are trained to keep together data points of similar features while at the same time, learn to push away this groups far from other groups. More technically, the objective of the CNN loss function is to minimize the cosine distance between the feature vectors of the same class, and maximise the cosine distance between feature vectors of different classes. 
 Here are a few helpful links: \
 a. https://pyimagesearch.com/2020/11/30/siamese-networks-with-keras-tensorflow-and-deep-learning/ \
-b. https://towardsdatascience.com/how-to-train-your-siamese-neural-network-4c6da3259463 \
+b. https://towardsdatascience.com/how-to-train-your-siamese-neural-network-4c6da3259463 
