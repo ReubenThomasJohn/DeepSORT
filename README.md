@@ -9,4 +9,5 @@ Instructions:
 `pip install -r requirements.txt`
 4. Open the `object_tracker_1.py` file and run it. The code should run out of the box.
 5. If you wish to use a different YOLO model, you can set it in during the yolo object creation: `yolo=YOLO_Fast(model = '...')`. This is found in line 19. 
+6. You can use this base code to perform tracking on whatever problem you need it for. You will simple need to retrain your object detector to detect the class you are interested in, and if needed, tune some of the thresholding constants. 
 
