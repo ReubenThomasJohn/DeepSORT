@@ -29,7 +29,7 @@ class_names = [c.strip() for c in open(os.path.abspath('Tracking_DeepSORT/data/l
 # we import the yolo class we created in the previous project
 from deep_sort.yoloV5 import YOLO_Fast
 # initialize the object
-yolo = YOLO_Fast(sc_thresh=.5, nms_thresh=.45, cnf_thresh=.45, model='./Tracking_DeepSORT/deep_sort/onnx_models/yolov5s.onnx')
+yolo = YOLO_Fast(sc_thresh=.5, nms_thresh=.45, cnf_thresh=.45, model='./Tracking_DeepSORT/deep_sort/onnx_models/yolov5m.onnx')
 
 # cost-related hyperparameters
 max_cosine_distance = 0.5
