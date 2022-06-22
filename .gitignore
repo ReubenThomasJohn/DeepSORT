@@ -5,3 +5,4 @@ pyenv.cfg
 share/
 pyvenv.cfg
 __pycache__/
+Tracking_DeepSORT/deep_sort/__pycache__/

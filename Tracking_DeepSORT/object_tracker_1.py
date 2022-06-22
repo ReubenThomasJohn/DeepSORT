@@ -37,13 +37,13 @@ nn_budget = None
 nms_max_overlap = 0.8
 
 # CNN based feature extraction model
-model_filename = 'Tracking_DeepSORT/model_data/mars-small128.pb'
+model_filename = 'Tracking_DeepSORT/model_data/mars-small128.pb' #.pb files are used to hold tensorflow models
 encoder = gdet.create_box_encoder(model_filename, batch_size=1)
 metric = nn_matching.NearestNeighborDistanceMetric('cosine', max_cosine_distance, nn_budget)
 tracker = Tracker(metric)
 
 # create our video object
-vid = cv2.VideoCapture('Tracking_DeepSORT/data/video/MOT16-13-raw.mp4')
+vid = cv2.VideoCapture('Tracking_DeepSORT/data/video/test.mp4')
 codec = cv2.VideoWriter_fourcc(*'XVID')
 vid_fps =int(vid.get(cv2.CAP_PROP_FPS))
 # vid_width,vid_height = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH)), int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
