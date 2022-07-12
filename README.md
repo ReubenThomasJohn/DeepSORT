@@ -1,4 +1,4 @@
-# DeepSORT
+# Perception MIY - Obeject Detection + Tracking using DeepSORT
 repo containing code for object detector using YOLOv5 and an obstacle tracker using DeepSORT.
 
 For the perception MIY - there are two projects, and the second, and more advanced projects relies on the first project. That is, the first project - object detection using yolov5, is a crucial step in the second tracking project. Hence, make sure you understand the first project well.
