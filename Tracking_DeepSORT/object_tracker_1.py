@@ -29,7 +29,7 @@ class_names = [c.strip() for c in open(os.path.abspath('Tracking_DeepSORT/data/l
 # we import the yolo class we created in the previous project
 from deep_sort.yoloV5 import YOLO_Fast
 # initialize the object
-yolo = YOLO_Fast(sc_thresh=.5, nms_thresh=.45, cnf_thresh=.45, model='./Tracking_DeepSORT/deep_sort/onnx_models/yolov5s.onnx')
+yolo = YOLO_Fast(sc_thresh=.5, nms_thresh=.45, cnf_thresh=.45, model='./Tracking_DeepSORT/deep_sort/onnx_models/yolov5m.onnx')
 
 # cost-related hyperparameters
 max_cosine_distance = 0.5
@@ -37,13 +37,13 @@ nn_budget = None
 nms_max_overlap = 0.8
 
 # CNN based feature extraction model
-model_filename = 'Tracking_DeepSORT/model_data/mars-small128.pb'
+model_filename = 'Tracking_DeepSORT/model_data/mars-small128.pb' #.pb files are used to hold tensorflow models
 encoder = gdet.create_box_encoder(model_filename, batch_size=1)
 metric = nn_matching.NearestNeighborDistanceMetric('cosine', max_cosine_distance, nn_budget)
 tracker = Tracker(metric)
 
 # create our video object
-vid = cv2.VideoCapture('Tracking_DeepSORT/data/video/MOT16-13-raw.mp4')
+vid = cv2.VideoCapture('Tracking_DeepSORT/data/video/test.mp4')
 codec = cv2.VideoWriter_fourcc(*'XVID')
 vid_fps =int(vid.get(cv2.CAP_PROP_FPS))
 # vid_width,vid_height = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH)), int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))

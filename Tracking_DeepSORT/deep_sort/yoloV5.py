@@ -9,10 +9,10 @@ tracking project as well.
 '''
 class YOLO_Fast(): # outputs tlbr bounding boxes
     '''
-    YOLOv5 outputs a 25200 detections. Each detection is an array containing the following format
+    YOLOv5 outputs 25200 detections. Each detection is an array containing the following format
     [cx, cy, w, h, confidence, scores for each class]. Hence, each detection will be an array of len (5 + no. of classes)
     Here, (cx, cy) is the pixel location for the center of the detected bbox.
-    (w, h) are the width and height of the bbox
+    (w, h) are the width and height of the bbox.
     confidence is the probability that YOLO thinks the detected box really has an object inside.
     class scores are the probabilities that the object detected belongs to each corresponding class.
     The bounding boxes are in the format (top, left), (bottom, right)
